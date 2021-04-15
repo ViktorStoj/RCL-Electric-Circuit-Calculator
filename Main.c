@@ -20,6 +20,8 @@ Description:
 
 ---------------------------------------------------------------------*/
 #include <stdio.h>
+#include "plplot.h"
+//#include "gng1106plplot.h"
 #include <gng1106plplot.h>  // provides definitions for using PLplot library
 #include <math.h>
 #include <float.h>
@@ -31,6 +33,7 @@ Description:
 #define FX_IX 1          // Row index for storing f(x) values
 #define NAMEFILE "EE_Data.txt"
 #define EPSILON 1e-10
+
 ///Structure
 typedef struct data{
     double L ;
@@ -315,7 +318,7 @@ Function: overZero
 Parameters:
     char var[2]: This string correlates to a specific data point from the structure.
 Returns:
-    The specific data point’s value given by the user
+    The specific data pointâ€™s value given by the user
 Description: This function will be used to get user inputs that are not
 negative or equal to zero.
 ----------------------------------------------------------------*/
@@ -490,12 +493,11 @@ void plot(int n, double *xPtr, double *yPtr){
     range = maxy - miny;  // the width of the range
     maxy = maxy + 0.1*range;
     miny = miny - 0.1*range;
-    plenv0(xPtr[0], xPtr[n-1], miny, maxy,
-          0, 1);
-    plcol0(GREEN);           // Select color for labels
+    plenv0(xPtr[0], xPtr[n-1], miny, maxy, 0, 1);
+    plcol0(BLUE);           // Select color for labels
     pllab("t", "q(t)", "Dissipation of Charge(q) over Time(t)");
     // Plot the velocity.
-    plcol0(BLUE);    // Color for plotting curve
+    plcol0(GREEN);    // Color for plotting curve
     plline(n, xPtr, yPtr);
     // Plot the points
     plend();
